@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>G6PD-ARON</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f5f7f9;
+            color: #222;
+        }
+
+        header {
+            background: #073b4c;
+            color: white;
+            padding: 25px 20px;
+            text-align: center;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 30px;
+        }
+
+        header p {
+            margin: 8px 0 0;
+            opacity: 0.9;
+        }
+
+        .container {
+            max-width: 700px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+
+        .search-box {
+            display: flex;
+            gap: 10px;
+        }
+
+        .search-box input {
+            flex: 1;
+            padding: 15px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            font-size: 16px;
+        }
+
+        .search-box button {
+            padding: 15px 20px;
+            border: none;
+            border-radius: 10px;
+            background: #073b4c;
+            color: white;
+            cursor: pointer;
+        }
+
+        .welcome {
+            margin-top: 30px;
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <h1>G6PD-ARON</h1>
+    <p>G6PD Drug Safety Checker</p>
+</header>
+
+<div class="container">
+
+    <div class="search-box">
+        <input
+            type="text"
+            id="searchInput"
+            placeholder="Search medication..."
+        >
+
+        <button onclick="searchDrug()">
+            Search
+        </button>
+    </div>
+
+    <div class="welcome">
+        <h2>Drug Safety Checker</h2>
+
+        <p>
+            Search for a medication to check its
+            safety classification in G6PD deficiency.
+        </p>
+
+        <p>
+            🔴 High Risk &nbsp;
+            🟠 Moderate Risk &nbsp;
+            🟢 Relatively Safe
+        </p>
+    </div>
+
+</div>
+
+<script>
+    function searchDrug() {
+        const drug = document.getElementById("searchInput").value;
+
+        if (drug.trim() === "") {
+            alert("Please enter a medication name.");
+            return;
+        }
+
+        alert("Searching for: " + drug);
+    }
+</script>
+
+</body>
+</html>

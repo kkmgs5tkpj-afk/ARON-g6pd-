@@ -1,0 +1,676 @@
+[
+  {
+    "name": "Naphthol",
+    "category": "HIGH",
+    "status": "AVOID"
+  },
+  {
+    "name": "Acetanilide",
+    "category": "HIGH",
+    "status": "AVOID"
+  },
+  {
+    "name": "Acetylphenylhydrazine",
+    "category": "HIGH",
+    "status": "AVOID",
+    "aliases": ["2-Phenylhydrazine"]
+  },
+  {
+    "name": "Aldesulfone sodium",
+    "category": "HIGH",
+    "status": "AVOID",
+    "aliases": ["Sulfoxone"]
+  },
+  {
+    "name": "Arsine",
+    "category": "HIGH",
+    "status": "AVOID"
+  },
+  {
+    "name": "Ascorbic acid",
+    "category": "HIGH",
+    "status": "AVOID",
+    "aliases": ["Vitamin C"]
+  },
+  {
+    "name": "Beta-Naphthol",
+    "category": "HIGH",
+    "status": "AVOID",
+    "aliases": ["2-Naphthol"]
+  },
+  {
+    "name": "Brinzolamide",
+    "category": "HIGH",
+    "status": "AVOID"
+  },
+  {
+    "name": "Bupivacaine",
+    "category": "HIGH",
+    "status": "AVOID"
+  },
+  {
+    "name": "Chloramphenicol",
+    "category": "HIGH",
+    "status": "AVOID"
+  },
+  {
+    "name": "Chloroquine",
+    "category": "HIGH",
+    "status": "AVOID"
+  },
+  {
+    "name": "Chloroquine + Proguanil",
+    "category": "HIGH",
+    "status": "AVOID"
+  },
+  {
+    "name": "Ciprofloxacin",
+    "category": "HIGH",
+    "status": "AVOID"
+  },
+  {
+    "name": "Dapsone",
+    "category": "HIGH",
+    "status": "AVOID",
+    "aliases": ["Diaminodiphenylsulfone"]
+  },
+  {
+    "name": "Diethylamine",
+    "category": "HIGH",
+    "status": "AVOID"
+  },
+  {
+    "name": "Dimenhydrinate",
+    "category": "HIGH",
+    "status": "AVOID"
+  },
+  {
+    "name": "Dimercaprol",
+    "category": "HIGH",
+    "status": "AVOID"
+  },
+  {
+    "name": "Dorzolamide",
+    "category": "HIGH",
+    "status": "AVOID"
+  },
+  {
+    "name": "Doxorubicin",
+    "category": "HIGH",
+    "status": "AVOID"
+  },
+  {
+    "name": "Enoxacin",
+    "category": "HIGH",
+    "status": "AVOID"
+  },
+  {
+    "name": "Furazolidone",
+    "category": "HIGH",
+    "status": "AVOID"
+  },
+  {
+    "name": "Glibenclamide",
+    "category": "HIGH",
+    "status": "AVOID",
+    "aliases": ["Glyburide"]
+  },
+  {
+    "name": "Gliclazide",
+    "category": "HIGH",
+    "status": "AVOID"
+  },
+  {
+    "name": "Glimepiride",
+    "category": "HIGH",
+    "status": "AVOID"
+  },
+  {
+    "name": "Glipizide",
+    "category": "HIGH",
+    "status": "AVOID"
+  },
+  {
+    "name": "Glucosulfone",
+    "category": "HIGH",
+    "status": "AVOID",
+    "aliases": ["Glucosulfone sodium"]
+  },
+  {
+    "name": "Hydroxychloroquine",
+    "category": "HIGH",
+    "status": "AVOID"
+  },
+  {
+    "name": "Isobutyl nitrate",
+    "category": "HIGH",
+    "status": "AVOID"
+  },
+  {
+    "name": "Levofloxacin",
+    "category": "HIGH",
+    "status": "AVOID"
+  },
+  {
+    "name": "Lomefloxacin",
+    "category": "HIGH",
+    "status": "AVOID"
+  },
+  {
+    "name": "Mefloquine",
+    "category": "HIGH",
+    "status": "AVOID"
+  },
+  {
+    "name": "Menadiol sodium sulfate",
+    "category": "HIGH",
+    "status": "AVOID",
+    "aliases": ["Vitamin K4 sodium sulfate"]
+  },
+  {
+    "name": "Menadione",
+    "category": "HIGH",
+    "status": "AVOID",
+    "aliases": ["Menaphtone", "Vitamin K3"]
+  },
+  {
+    "name": "Menadione sodium bisulfate",
+    "category": "HIGH",
+    "status": "AVOID",
+    "aliases": ["Vitamin K3 sodium bisulfate"]
+  },
+  {
+    "name": "Mepacrine",
+    "category": "HIGH",
+    "status": "AVOID",
+    "aliases": ["Quinacrine"]
+  },
+  {
+    "name": "Mesalazine",
+    "category": "HIGH",
+    "status": "AVOID",
+    "aliases": ["5-Aminosalicylic acid", "5-ASA"]
+  },
+  {
+    "name": "Metamizole",
+    "category": "HIGH",
+    "status": "AVOID",
+    "aliases": ["Dipyrone", "Noramidopyrine"]
+  },
+  {
+    "name": "Methylthioninium chloride",
+    "category": "HIGH",
+    "status": "AVOID",
+    "aliases": ["Methylene blue"]
+  },
+  {
+    "name": "Moxifloxacin",
+    "category": "HIGH",
+    "status": "AVOID"
+  },
+  {
+    "name": "Nalidixic acid",
+    "category": "HIGH",
+    "status": "AVOID"
+  },
+  {
+    "name": "Naphthalene",
+    "category": "HIGH",
+    "status": "AVOID",
+    "aliases": ["Naphthalin"]
+  },
+  {
+    "name": "Niridazole",
+    "category": "HIGH",
+    "status": "AVOID"
+  },
+  {
+    "name": "Nitric oxide",
+    "category": "HIGH",
+    "status": "AVOID"
+  },
+  {
+    "name": "Nitrofural",
+    "category": "HIGH",
+    "status": "AVOID",
+    "aliases": ["Nitrofurazone"]
+  },
+  {
+    "name": "Nitrofurantoin",
+    "category": "HIGH",
+    "status": "AVOID"
+  },
+  {
+    "name": "Nitroglycerin",
+    "category": "HIGH",
+    "status": "AVOID"
+  },
+  {
+    "name": "Aspirin",
+    "category": "HIGH",
+    "status": "AVOID",
+    "aliases": ["Acetylsalicylic acid", "ASA"]
+  },
+  {
+    "name": "Ofloxacin",
+    "category": "HIGH",
+    "status": "AVOID"
+  },
+  {
+    "name": "Urate oxidase",
+    "category": "HIGH",
+    "status": "AVOID",
+    "aliases": ["Oxidase, urate"]
+  },
+  {
+    "name": "Pamaquine",
+    "category": "HIGH",
+    "status": "AVOID"
+  },
+  {
+    "name": "Pefloxacin",
+    "category": "HIGH",
+    "status": "AVOID"
+  },
+  {
+    "name": "Pentaquine",
+    "category": "HIGH",
+    "status": "AVOID"
+  },
+  {
+    "name": "Phenacetin",
+    "category": "HIGH",
+    "status": "AVOID",
+    "aliases": ["Acetophenetidin"]
+  },
+  {
+    "name": "Phenazopyridine",
+    "category": "HIGH",
+    "status": "AVOID"
+  },
+  {
+    "name": "Phenylhydrazine",
+    "category": "HIGH",
+    "status": "AVOID"
+  },
+  {
+    "name": "Pipemidic acid",
+    "category": "HIGH",
+    "status": "AVOID"
+  },
+  {
+    "name": "Primaquine",
+    "category": "HIGH",
+    "status": "AVOID"
+  },
+  {
+    "name": "Probenecid",
+    "category": "HIGH",
+    "status": "AVOID"
+  },
+  {
+    "name": "Quinidine + Phenylhydrazine",
+    "category": "HIGH",
+    "status": "AVOID"
+  },
+  {
+    "name": "Rasburicase",
+    "category": "HIGH",
+    "status": "AVOID"
+  },
+  {
+    "name": "Sodium nitroprusside",
+    "category": "HIGH",
+    "status": "AVOID"
+  },
+  {
+    "name": "Spiramycin",
+    "category": "HIGH",
+    "status": "AVOID"
+  },
+  {
+    "name": "Stibophen",
+    "category": "HIGH",
+    "status": "AVOID"
+  },
+  {
+    "name": "Sulfacetamide",
+    "category": "HIGH",
+    "status": "AVOID"
+  },
+  {
+    "name": "Sulfadimidine",
+    "category": "HIGH",
+    "status": "AVOID",
+    "aliases": ["Sulfamethazine"]
+  },
+  {
+    "name": "Sulfafurazole",
+    "category": "HIGH",
+    "status": "AVOID"
+  },
+  {
+    "name": "Sulfamethoxazole",
+    "category": "HIGH",
+    "status": "AVOID"
+  },
+  {
+    "name": "Sulfanilamide",
+    "category": "HIGH",
+    "status": "AVOID"
+  },
+  {
+    "name": "Sulfapyridine",
+    "category": "HIGH",
+    "status": "AVOID"
+  },
+  {
+    "name": "Sulfasalazine",
+    "category": "HIGH",
+    "status": "AVOID"
+  },
+  {
+    "name": "Thiamphenicol",
+    "category": "HIGH",
+    "status": "AVOID"
+  },
+  {
+    "name": "Thiazosulfone",
+    "category": "HIGH",
+    "status": "AVOID"
+  },
+  {
+    "name": "Tolonium chloride",
+    "category": "HIGH",
+    "status": "AVOID",
+    "aliases": ["Toluidine blue"]
+  },
+  {
+    "name": "Trimethoprim + Sulfamethoxazole",
+    "category": "HIGH",
+    "status": "AVOID",
+    "aliases": ["Co-trimoxazole", "Cotrimoxazole", "TMP-SMX"]
+  },
+  {
+    "name": "Trinitrotoluene",
+    "category": "HIGH",
+    "status": "AVOID",
+    "aliases": ["TNT"]
+  },
+
+  {
+    "name": "Acetazolamide",
+    "category": "MODERATE",
+    "status": "USE WITH CAUTION"
+  },
+  {
+    "name": "Aminophenazone",
+    "category": "MODERATE",
+    "status": "USE WITH CAUTION",
+    "aliases": ["Aminopyrine", "Amidopyrine", "Pyramidone"]
+  },
+  {
+    "name": "Antazoline",
+    "category": "MODERATE",
+    "status": "USE WITH CAUTION",
+    "aliases": ["Antistine"]
+  },
+  {
+    "name": "Arginine",
+    "category": "MODERATE",
+    "status": "USE WITH CAUTION",
+    "aliases": ["2-Amino-5-guanidinopentanoic acid"]
+  },
+  {
+    "name": "Bean of St. Ignatius",
+    "category": "MODERATE",
+    "status": "USE WITH CAUTION",
+    "aliases": ["Strychnos ignatii"]
+  },
+  {
+    "name": "Benorilate",
+    "category": "MODERATE",
+    "status": "USE WITH CAUTION"
+  },
+  {
+    "name": "Calcium carboxylate",
+    "category": "MODERATE",
+    "status": "USE WITH CAUTION"
+  },
+  {
+    "name": "Carbutamide",
+    "category": "MODERATE",
+    "status": "USE WITH CAUTION"
+  },
+  {
+    "name": "Colchicine",
+    "category": "MODERATE",
+    "status": "USE WITH CAUTION"
+  },
+  {
+    "name": "Diphenhydramine",
+    "category": "MODERATE",
+    "status": "USE WITH CAUTION",
+    "aliases": ["Benadryl"]
+  },
+  {
+    "name": "Dopamine",
+    "category": "MODERATE",
+    "status": "USE WITH CAUTION"
+  },
+  {
+    "name": "Epirubicin",
+    "category": "MODERATE",
+    "status": "USE WITH CAUTION"
+  },
+  {
+    "name": "Flumequine",
+    "category": "MODERATE",
+    "status": "USE WITH CAUTION"
+  },
+  {
+    "name": "Glibornuride",
+    "category": "MODERATE",
+    "status": "USE WITH CAUTION"
+  },
+  {
+    "name": "Ibuprofen",
+    "category": "MODERATE",
+    "status": "USE WITH CAUTION"
+  },
+  {
+    "name": "Indigofera",
+    "category": "MODERATE",
+    "status": "USE WITH CAUTION"
+  },
+  {
+    "name": "Isoniazid",
+    "category": "MODERATE",
+    "status": "USE WITH CAUTION",
+    "aliases": ["INH"]
+  },
+  {
+    "name": "Lawsone inermis",
+    "category": "MODERATE",
+    "status": "USE WITH CAUTION",
+    "aliases": ["Henna"]
+  },
+  {
+    "name": "Levodopa",
+    "category": "MODERATE",
+    "status": "USE WITH CAUTION",
+    "aliases": ["L-Dopa"]
+  },
+  {
+    "name": "Morpholine",
+    "category": "MODERATE",
+    "status": "USE WITH CAUTION"
+  },
+  {
+    "name": "Norfloxacin",
+    "category": "MODERATE",
+    "status": "USE WITH CAUTION"
+  },
+  {
+    "name": "Para-aminobenzoic acid",
+    "category": "MODERATE",
+    "status": "USE WITH CAUTION",
+    "aliases": ["PABA", "4-Aminobenzoic acid"]
+  },
+  {
+    "name": "Paracetamol",
+    "category": "MODERATE",
+    "status": "USE WITH CAUTION",
+    "aliases": ["Acetaminophen"]
+  },
+  {
+    "name": "Paracetamol + Propyphenazone",
+    "category": "MODERATE",
+    "status": "USE WITH CAUTION"
+  },
+  {
+    "name": "Phenazone",
+    "category": "MODERATE",
+    "status": "USE WITH CAUTION",
+    "aliases": ["Antipyrine"]
+  },
+  {
+    "name": "Phenylbutazone",
+    "category": "MODERATE",
+    "status": "USE WITH CAUTION"
+  },
+  {
+    "name": "Phenytoin",
+    "category": "MODERATE",
+    "status": "USE WITH CAUTION"
+  },
+  {
+    "name": "Phytomenadione",
+    "category": "MODERATE",
+    "status": "USE WITH CAUTION",
+    "aliases": ["Vitamin K1"]
+  },
+  {
+    "name": "Prilocaine",
+    "category": "MODERATE",
+    "status": "USE WITH CAUTION"
+  },
+  {
+    "name": "Procainamide",
+    "category": "MODERATE",
+    "status": "USE WITH CAUTION"
+  },
+  {
+    "name": "Proguanil",
+    "category": "MODERATE",
+    "status": "USE WITH CAUTION",
+    "aliases": ["Chlorguanidine", "Clorguanidina"]
+  },
+  {
+    "name": "Propylene glycol",
+    "category": "MODERATE",
+    "status": "USE WITH CAUTION"
+  },
+  {
+    "name": "Propyphenazone",
+    "category": "MODERATE",
+    "status": "USE WITH CAUTION"
+  },
+  {
+    "name": "Pyrimethamine",
+    "category": "MODERATE",
+    "status": "USE WITH CAUTION"
+  },
+  {
+    "name": "Quinidine",
+    "category": "MODERATE",
+    "status": "USE WITH CAUTION"
+  },
+  {
+    "name": "Quinidine + Quinine",
+    "category": "MODERATE",
+    "status": "USE WITH CAUTION"
+  },
+  {
+    "name": "Quinine",
+    "category": "MODERATE",
+    "status": "USE WITH CAUTION"
+  },
+  {
+    "name": "Streptomycin",
+    "category": "MODERATE",
+    "status": "USE WITH CAUTION"
+  },
+  {
+    "name": "Succimer",
+    "category": "MODERATE",
+    "status": "USE WITH CAUTION"
+  },
+  {
+    "name": "Sulfacytine",
+    "category": "MODERATE",
+    "status": "USE WITH CAUTION"
+  },
+  {
+    "name": "Sulfadiazine",
+    "category": "MODERATE",
+    "status": "USE WITH CAUTION"
+  },
+  {
+    "name": "Sulfadiazine + Trimethoprim",
+    "category": "MODERATE",
+    "status": "USE WITH CAUTION"
+  },
+  {
+    "name": "Sulfadoxine",
+    "category": "MODERATE",
+    "status": "USE WITH CAUTION"
+  },
+  {
+    "name": "Sulfaguanidine",
+    "category": "MODERATE",
+    "status": "USE WITH CAUTION"
+  },
+  {
+    "name": "Sulfamerazine",
+    "category": "MODERATE",
+    "status": "USE WITH CAUTION"
+  },
+  {
+    "name": "Sulfamethizole",
+    "category": "MODERATE",
+    "status": "USE WITH CAUTION"
+  },
+  {
+    "name": "Sulfamethoxypyridazine",
+    "category": "MODERATE",
+    "status": "USE WITH CAUTION"
+  },
+  {
+    "name": "Sulfoxone",
+    "category": "MODERATE",
+    "status": "USE WITH CAUTION"
+  },
+  {
+    "name": "Tiaprofenic acid",
+    "category": "MODERATE",
+    "status": "USE WITH CAUTION"
+  },
+  {
+    "name": "Trihexyphenidyl",
+    "category": "MODERATE",
+    "status": "USE WITH CAUTION",
+    "aliases": ["Benzhexol", "Benzexolo"]
+  },
+  {
+    "name": "Trimethoprim",
+    "category": "MODERATE",
+    "status": "USE WITH CAUTION"
+  },
+  {
+    "name": "Tripelennamine",
+    "category": "MODERATE",
+    "status": "USE WITH CAUTION",
+    "aliases": ["Pyribenzamine"]
+  }
+]

@@ -99,8 +99,93 @@ function searchDrug() {
 
 
     if (!input) {
+
+        result.style.display = "none";
+
         return;
+
     }
+
+
+    const drug = drugs.find(item => {
+
+        const name =
+            item.name.toLowerCase();
+
+
+        // البحث الجزئي بالاسم
+        if (name.includes(input)) {
+
+            return true;
+
+        }
+
+
+        // البحث الجزئي بالأسماء البديلة
+        if (item.aliases) {
+
+            return item.aliases.some(alias =>
+                alias.toLowerCase().includes(input)
+            );
+
+        }
+
+
+        return false;
+
+    });
+
+
+    result.style.display = "block";
+
+
+    if (!drug) {
+
+        result.innerHTML =
+            "<h3>Drug not found</h3>";
+
+        return;
+
+    }
+
+
+    let risk = "";
+
+
+    if (drug.category === "HIGH") {
+
+        risk = "🔴 HIGH RISK";
+
+    }
+
+    else if (drug.category === "MODERATE") {
+
+        risk = "🟠 MODERATE RISK";
+
+    }
+
+    else {
+
+        risk = "🟢 RELATIVELY SAFE";
+
+    }
+
+
+    result.innerHTML = `
+        <h2>${drug.name}</h2>
+
+        <h3>${risk}</h3>
+
+        <p>
+            <strong>${drug.status}</strong>
+        </p>
+
+        <p>
+            ${drug.notes || ""}
+        </p>
+    `;
+
+}
 
 
     const drug = drugs.find(item => {

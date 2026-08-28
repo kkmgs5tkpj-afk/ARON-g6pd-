@@ -672,5 +672,34 @@
     "category": "MODERATE",
     "status": "USE WITH CAUTION",
     "aliases": ["Pyribenzamine"]
-  }
+  } 
+ ,
+{
+  "name": "Azathioprine",
+  "category": "SAFE",
+  "status": "RELATIVELY SAFE",
+  "aliases": [],
+  "notes": "Listed as relatively safe in the supplied classification; use with caution."
+},
+{
+  "name": "Baclofen",
+  "category": "SAFE",
+  "status": "RELATIVELY SAFE",
+  "aliases": [],
+  "notes": "Listed as relatively safe in the supplied classification; use with caution."
+},
+{
+  "name": "Pregabalin",
+  "category": "SAFE",
+  "status": "RELATIVELY SAFE",
+  "aliases": [],
+  "notes": "Listed as relatively safe in the supplied classification; use with caution."
+},
+{
+  "name": "Sulfisoxazole",
+  "category": "SAFE",
+  "status": "RELATIVELY SAFE",
+  "aliases": ["Gantrisin"],
+  "notes": "Listed as relatively safe in the supplied classification."
+}
 ]

@@ -1,295 +1,410 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>G6PD-ARON</title>
 
-    <style>
-        body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-            background: #f4f7f9;
-        }
+<meta charset="UTF-8">
 
-        header {
-            background: #073b4c;
-            color: white;
-            padding: 30px;
-            text-align: center;
-        }
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        .container {
-            max-width: 700px;
-            margin: 30px auto;
-            padding: 20px;
-        }
+<meta name="theme-color" content="#073b4c">
 
-        .search {
-            display: flex;
-            gap: 10px;
-        }
+<title>G6PD-ARON</title>
 
-        input {
-            flex: 1;
-            padding: 15px;
-            font-size: 16px;
-        }
+<style>
 
-        button {
-            padding: 15px 20px;
-            background: #073b4c;
-            color: white;
-            border: none;
-        }
+* {
+    box-sizing: border-box;
+}
 
-        #result {
-            margin-top: 20px;
-            padding: 20px;
-            background: white;
-            display: none;
-        }
-    </style>
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f4f7f9;
+    color: #222;
+}
+
+header {
+    background: #073b4c;
+    color: white;
+    padding: 30px 20px;
+    text-align: center;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 34px;
+}
+
+header p {
+    margin-top: 8px;
+}
+
+.container {
+    max-width: 800px;
+    margin: 30px auto;
+    padding: 20px;
+}
+
+.search {
+    display: flex;
+    gap: 10px;
+}
+
+#searchInput {
+    flex: 1;
+    padding: 15px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+}
+
+button {
+    padding: 15px 20px;
+    background: #073b4c;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+#result {
+    margin-top: 20px;
+    display: none;
+}
+
+.drug-card {
+    background: white;
+    padding: 20px;
+    margin-bottom: 12px;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+.drug-name {
+    font-size: 22px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.high {
+    color: #b00020;
+}
+
+.moderate {
+    color: #9a6500;
+}
+
+.safe {
+    color: #137333;
+}
+
+.status {
+    font-weight: bold;
+    margin: 8px 0;
+}
+
+.aliases {
+    color: #666;
+    font-size: 14px;
+}
+
+.not-found {
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+}
+
+</style>
+
 </head>
+
 
 <body>
 
 <header>
-    <h1>G6PD-ARON</h1>
-    <p>G6PD Drug Safety Checker</p>
+
+<h1>G6PD-ARON</h1>
+
+<p>G6PD Drug Safety Checker</p>
+
 </header>
+
 
 <div class="container">
 
-    <div class="search">
-        <input id="searchInput" placeholder="Search medication...">
-        <button onclick="searchDrug()">Search</button>
-    </div>
+<div class="search">
 
-    <div id="result"></div>
+<input
+    id="searchInput"
+    type="text"
+    placeholder="Search medication..."
+    autocomplete="off"
+>
+
+<button onclick="searchDrug()">
+    Search
+</button>
 
 </div>
+
+
+<div id="result"></div>
+
+</div>
+
 
 <script>
 
 let drugs = [];
 
-fetch("data/drugs.json")
-    .then(response => response.json())
-    .then(data => {
-        drugs = data;
-        console.log("Database loaded:", drugs.length);
-    })
-    .catch(error => {
-        console.error("Database error:", error);
-    });
 
+// ================================
+// LOAD DATABASE
+// ================================
+
+fetch("data/drugs.json")
+
+.then(response => {
+
+    if (!response.ok) {
+        throw new Error("Database could not be loaded");
+    }
+
+    return response.json();
+
+})
+
+.then(data => {
+
+    drugs = data;
+
+    console.log(
+        "Database loaded:",
+        drugs.length,
+        "drugs"
+    );
+
+})
+
+.catch(error => {
+
+    console.error(
+        "Database error:",
+        error
+    );
+
+});
+
+
+// ================================
+// NORMALIZE TEXT
+// ================================
+
+function normalize(text) {
+
+    return String(text || "")
+        .toLowerCase()
+        .trim()
+        .replace(/[-_]/g, " ")
+        .replace(/\s+/g, " ");
+
+}
+
+
+// ================================
+// SEARCH
+// ================================
 
 function searchDrug() {
 
-    const input = document
-        .getElementById("searchInput")
-        .value
-        .trim()
-        .toLowerCase();
+    const input = normalize(
+        document.getElementById("searchInput").value
+    );
 
     const result =
         document.getElementById("result");
 
+
+    // Empty search
+
     if (input === "") {
+
         result.style.display = "none";
+
+        result.innerHTML = "";
+
         return;
+
     }
+
+
+    // ================================
+    // PARTIAL SEARCH
+    // ================================
 
     const matches = drugs.filter(drug => {
 
         const name =
-            String(drug.name || "").toLowerCase();
+            normalize(drug.name);
 
-        const aliases =
-            Array.isArray(drug.aliases)
-                ? drug.aliases
-                : [];
 
-        // البحث الجزئي داخل اسم الدواء
-        const nameMatch =
-            name.includes(input);
+        // Search in drug name
 
-        // البحث الجزئي داخل الأسماء البديلة
-        const aliasMatch =
-            aliases.some(alias =>
-                String(alias)
-                    .toLowerCase()
-                    .includes(input)
+        if (name.includes(input)) {
+
+            return true;
+
+        }
+
+
+        // Search in aliases
+
+        if (Array.isArray(drug.aliases)) {
+
+            return drug.aliases.some(alias =>
+
+                normalize(alias).includes(input)
+
             );
 
-        return nameMatch || aliasMatch;
+        }
+
+
+        return false;
 
     });
 
 
-    result.style.display = "block";
-
+    // ================================
+    // NO RESULTS
+    // ================================
 
     if (matches.length === 0) {
 
+        result.style.display = "block";
+
         result.innerHTML = `
-            <h3>Drug not found</h3>
-            <p>
-                No medication matching
-                "<strong>${input}</strong>"
-                was found.
-            </p>
+
+            <div class="not-found">
+
+                <h3>Drug not found</h3>
+
+                <p>
+                    No medication matching
+                    "<strong>${input}</strong>"
+                    was found.
+                </p>
+
+            </div>
+
         `;
 
         return;
+
     }
+
+
+    // ================================
+    // DISPLAY RESULTS
+    // ================================
+
+    result.style.display = "block";
 
 
     result.innerHTML = matches
         .slice(0, 20)
         .map(drug => {
 
-            let riskText;
-            let riskClass;
+
+            let riskText = "";
+
+            let riskClass = "";
+
 
             if (drug.category === "HIGH") {
 
                 riskText = "🔴 HIGH RISK";
+
                 riskClass = "high";
 
-            } else if (drug.category === "MODERATE") {
+            }
+
+            else if (drug.category === "MODERATE") {
 
                 riskText = "🟠 MODERATE RISK";
+
                 riskClass = "moderate";
 
-            } else {
+            }
+
+            else {
 
                 riskText = "🟢 RELATIVELY SAFE";
+
                 riskClass = "safe";
 
             }
 
 
-            return `
-                <div class="drug-result">
+            let aliasesHTML = "";
 
-                    <div class="drug-name">
-                        ${drug.name}
+
+            if (
+                Array.isArray(drug.aliases) &&
+                drug.aliases.length > 0
+            ) {
+
+                aliasesHTML = `
+
+                    <div class="aliases">
+
+                        Also known as:
+                        ${drug.aliases.join(", ")}
+
                     </div>
 
-                    <div class="risk ${riskClass}">
-                        ${riskText}
-                    </div>
-
-                    <div class="status">
-                        ${drug.status || ""}
-                    </div>
-
-                    <div class="notes">
-                        ${drug.notes || ""}
-                    </div>
-
-                </div>
-            `;
-
-        })
-        .join("");
-
-}
-
-
-    // البحث الجزئي داخل الاسم والـ aliases
-    const matches = drugs.filter(item => {
-
-        const name =
-            String(item.name || "").toLowerCase();
-
-        const aliases =
-            Array.isArray(item.aliases)
-                ? item.aliases
-                : [];
-
-
-        // الاسم الرئيسي
-        if (name.includes(input)) {
-            return true;
-        }
-
-
-        // الأسماء البديلة
-        return aliases.some(alias =>
-            String(alias)
-                .toLowerCase()
-                .includes(input)
-        );
-
-    });
-
-
-    result.style.display = "block";
-
-
-    // لا توجد نتائج
-    if (matches.length === 0) {
-
-        result.innerHTML = `
-            <h3>Drug not found</h3>
-            <p>No medication matching "${input}" was found.</p>
-        `;
-
-        return;
-    }
-
-
-    // عرض كل النتائج
-    result.innerHTML = matches
-        .slice(0, 20)
-        .map(drug => {
-
-            let risk = "";
-
-            if (drug.category === "HIGH") {
-
-                risk = "🔴 HIGH RISK";
-
-            } else if (drug.category === "MODERATE") {
-
-                risk = "🟠 MODERATE RISK";
-
-            } else {
-
-                risk = "🟢 RELATIVELY SAFE";
+                `;
 
             }
 
 
             return `
-                <div style="
-                    padding:15px;
-                    margin-bottom:10px;
-                    border-bottom:1px solid #ddd;
-                ">
 
-                    <h2 style="margin:0 0 8px 0;">
+                <div class="drug-card">
+
+                    <div class="drug-name">
+
                         ${drug.name}
-                    </h2>
 
-                    <h3 style="margin:5px 0;">
-                        ${risk}
-                    </h3>
+                    </div>
 
-                    <p>
-                        <strong>
-                            ${drug.status || ""}
-                        </strong>
-                    </p>
 
-                    <p>
-                        ${drug.notes || ""}
-                    </p>
+                    <div class="${riskClass}">
+
+                        ${riskText}
+
+                    </div>
+
+
+                    <div class="status">
+
+                        ${drug.status || ""}
+
+                    </div>
+
+
+                    ${aliasesHTML}
+
+
+                    ${
+                        drug.notes
+                        ? `<p>${drug.notes}</p>`
+                        : ""
+                    }
 
                 </div>
+
             `;
 
         })
@@ -298,152 +413,25 @@ function searchDrug() {
 }
 
 
-    const drug = drugs.find(item => {
+// ================================
+// ENTER KEY
+// ================================
 
-    const name = String(item.name || "").toLowerCase();
+document
+    .getElementById("searchInput")
+    .addEventListener("keydown", function(event) {
 
-    if (name.includes(input)) {
-        return true;
-    }
+        if (event.key === "Enter") {
 
-    if (Array.isArray(item.aliases)) {
-
-        return item.aliases.some(alias =>
-            String(alias || "").toLowerCase().includes(input)
-        );
-
-    }
-
-    return false;
-
-});
-
-        // البحث الجزئي بالأسماء البديلة
-        if (item.aliases) {
-
-            return item.aliases.some(alias =>
-                alias.toLowerCase().includes(input)
-            );
+            searchDrug();
 
         }
-
-
-        return false;
 
     });
-
-
-    result.style.display = "block";
-
-
-    if (!drug) {
-
-        result.innerHTML =
-            "<h3>Drug not found</h3>";
-
-        return;
-
-    }
-
-
-    let risk = "";
-
-
-    if (drug.category === "HIGH") {
-
-        risk = "🔴 HIGH RISK";
-
-    }
-
-    else if (drug.category === "MODERATE") {
-
-        risk = "🟠 MODERATE RISK";
-
-    }
-
-    else {
-
-        risk = "🟢 RELATIVELY SAFE";
-
-    }
-
-
-    result.innerHTML = `
-        <h2>${drug.name}</h2>
-
-        <h3>${risk}</h3>
-
-        <p>
-            <strong>${drug.status}</strong>
-        </p>
-
-        <p>
-            ${drug.notes || ""}
-        </p>
-    `;
-
-}
-
-
-    const drug = drugs.find(item => {
-
-        if (item.name.toLowerCase() === input) {
-            return true;
-        }
-
-        if (item.aliases) {
-
-            return item.aliases.some(alias =>
-                alias.toLowerCase() === input
-            );
-
-        }
-
-        return false;
-
-    });
-
-
-    result.style.display = "block";
-
-
-    if (!drug) {
-
-        result.innerHTML =
-            "<h3>Drug not found</h3>";
-
-        return;
-
-    }
-
-
-    let risk = "";
-
-    if (drug.category === "HIGH") {
-
-        risk = "🔴 HIGH RISK";
-
-    } else if (drug.category === "MODERATE") {
-
-        risk = "🟠 MODERATE RISK";
-
-    } else {
-
-        risk = "🟢 RELATIVELY SAFE";
-
-    }
-
-
-    result.innerHTML = `
-        <h2>${drug.name}</h2>
-        <h3>${risk}</h3>
-        <p><strong>${drug.status}</strong></p>
-        <p>${drug.notes || ""}</p>
-    `;
-
-}
 
 </script>
 
+
 </body>
+
 </html>

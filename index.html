@@ -536,9 +536,146 @@ document
 
         if (event.key === "Enter") {
 
-            searchDrug();
+            function searchDrug() {
+
+    const input =
+        normalize(
+            document.getElementById("searchInput").value
+        );
+
+    const result =
+        document.getElementById("result");
+
+    const notFound =
+        document.getElementById("notFound");
+
+
+    if (input === "") {
+
+        result.style.display = "none";
+        notFound.style.display = "none";
+
+        return;
+
+    }
+
+
+    const drug = drugs.find(item => {
+
+        const mainName =
+            normalize(item.name);
+
+        // Exact generic-name match
+        if (mainName === input) {
+            return true;
+        }
+
+
+        // Alias match
+        if (item.aliases) {
+
+            const aliasMatch =
+                item.aliases.some(alias =>
+                    normalize(alias) === input
+                );
+
+            if (aliasMatch) {
+                return true;
+            }
 
         }
+
+
+        return false;
+
+    });
+
+
+    if (!drug) {
+
+        result.style.display = "none";
+        notFound.style.display = "block";
+
+        return;
+
+    }
+
+
+    notFound.style.display = "none";
+    result.style.display = "block";
+
+
+    document.getElementById("drugName")
+        .textContent = drug.name;
+
+
+    const riskElement =
+        document.getElementById("risk");
+
+
+    riskElement.className = "risk";
+
+
+    if (drug.category === "HIGH") {
+
+        riskElement.textContent =
+            "🔴 HIGH RISK";
+
+        riskElement.classList.add("high");
+
+    }
+
+    else if (drug.category === "MODERATE") {
+
+        riskElement.textContent =
+            "🟠 MODERATE RISK";
+
+        riskElement.classList.add("moderate");
+
+    }
+
+    else {
+
+        riskElement.textContent =
+            "🟢 RELATIVELY SAFE";
+
+        riskElement.classList.add("safe");
+
+    }
+
+
+    document.getElementById("status")
+        .textContent = drug.status;
+
+
+    document.getElementById("notes")
+        .textContent =
+            drug.notes ||
+            "No additional information available.";
+
+
+    const aliasesElement =
+        document.getElementById("aliases");
+
+
+    if (
+        drug.aliases &&
+        drug.aliases.length > 0
+    ) {
+
+        aliasesElement.textContent =
+            "Also known as: " +
+            drug.aliases.join(", ");
+
+    }
+
+    else {
+
+        aliasesElement.textContent = "";
+
+    }
+
+}
 
     });
 

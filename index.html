@@ -13,6 +13,58 @@
 
     <title>G6PD-ARON</title>
 
+    .search-container {
+    position: relative;
+}
+
+.suggestions {
+    display: none;
+    position: absolute;
+    top: 70px;
+    left: 0;
+    right: 105px;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.12);
+    overflow: hidden;
+    z-index: 100;
+}
+
+.suggestion {
+    padding: 14px 16px;
+    cursor: pointer;
+    border-bottom: 1px solid #eee;
+}
+
+.suggestion:last-child {
+    border-bottom: none;
+}
+
+.suggestion:hover {
+    background: #f4f7f9;
+}
+
+.suggestion-name {
+    font-weight: bold;
+}
+
+.suggestion-risk {
+    font-size: 13px;
+    margin-top: 4px;
+}
+
+.suggestion-high {
+    color: #b00020;
+}
+
+.suggestion-moderate {
+    color: #9a6500;
+}
+
+.suggestion-safe {
+    color: #137333;
+}
+    
     <style>
 
         * {
@@ -234,6 +286,10 @@
 
     <div class="search-box">
 
+     <div class="search-container">
+
+    <div class="search-box">
+
         <input
             type="text"
             id="searchInput"
@@ -246,6 +302,12 @@
         </button>
 
     </div>
+
+    <div id="suggestions"
+         class="suggestions">
+    </div>
+
+</div>
 
 
     <div class="welcome">
@@ -529,7 +591,135 @@ function searchDrug() {
 
 
 // Search when pressing Enter
+const searchInput =
+    document.getElementById("searchInput");
 
+const suggestions =
+    document.getElementById("suggestions");
+
+
+searchInput.addEventListener("input", function() {
+
+    const input =
+        normalize(this.value);
+
+    suggestions.innerHTML = "";
+
+    if (input.length < 2) {
+
+        suggestions.style.display = "none";
+
+        return;
+    }
+
+
+    const matches = drugs
+        .filter(item => {
+
+            const name =
+                normalize(item.name);
+
+            const aliases =
+                item.aliases || [];
+
+            const nameMatch =
+                name.includes(input);
+
+            const aliasMatch =
+                aliases.some(alias =>
+                    normalize(alias).includes(input)
+                );
+
+            return nameMatch || aliasMatch;
+
+        })
+        .slice(0, 8);
+
+
+    if (matches.length === 0) {
+
+        suggestions.style.display = "none";
+
+        return;
+    }
+
+
+    matches.forEach(drug => {
+
+        const item =
+            document.createElement("div");
+
+        item.className = "suggestion";
+
+
+        let riskText = "";
+        let riskClass = "";
+
+
+        if (drug.category === "HIGH") {
+
+            riskText = "🔴 High Risk";
+            riskClass = "suggestion-high";
+
+        }
+
+        else if (drug.category === "MODERATE") {
+
+            riskText = "🟠 Moderate Risk";
+            riskClass = "suggestion-moderate";
+
+        }
+
+        else {
+
+            riskText = "🟢 Relatively Safe";
+            riskClass = "suggestion-safe";
+
+        }
+
+
+        item.innerHTML = `
+            <div class="suggestion-name">
+                ${drug.name}
+            </div>
+
+            <div class="suggestion-risk ${riskClass}">
+                ${riskText}
+            </div>
+        `;
+
+
+        item.addEventListener("click", function() {
+
+            searchInput.value = drug.name;
+
+            suggestions.style.display = "none";
+
+            searchDrug();
+
+        });
+
+
+        suggestions.appendChild(item);
+
+    });
+
+
+    suggestions.style.display = "block";
+
+});
+    document.addEventListener("click", function(event) {
+
+    if (
+        !event.target.closest(".search-container")
+    ) {
+
+        suggestions.style.display = "none";
+
+    }
+
+});
+    
 document
     .getElementById("searchInput")
     .addEventListener("keydown", function(event) {

@@ -300,17 +300,23 @@ function searchDrug() {
 
     const drug = drugs.find(item => {
 
-        const name =
-            item.name.toLowerCase();
+    const name = String(item.name || "").toLowerCase();
 
+    if (name.includes(input)) {
+        return true;
+    }
 
-        // البحث الجزئي بالاسم
-        if (name.includes(input)) {
+    if (Array.isArray(item.aliases)) {
 
-            return true;
+        return item.aliases.some(alias =>
+            String(alias || "").toLowerCase().includes(input)
+        );
 
-        }
+    }
 
+    return false;
+
+});
 
         // البحث الجزئي بالأسماء البديلة
         if (item.aliases) {

@@ -96,10 +96,107 @@ function searchDrug() {
     const result =
         document.getElementById("result");
 
-    if (!input) {
+    if (input === "") {
         result.style.display = "none";
         return;
     }
+
+    const matches = drugs.filter(drug => {
+
+        const name =
+            String(drug.name || "").toLowerCase();
+
+        const aliases =
+            Array.isArray(drug.aliases)
+                ? drug.aliases
+                : [];
+
+        // البحث الجزئي داخل اسم الدواء
+        const nameMatch =
+            name.includes(input);
+
+        // البحث الجزئي داخل الأسماء البديلة
+        const aliasMatch =
+            aliases.some(alias =>
+                String(alias)
+                    .toLowerCase()
+                    .includes(input)
+            );
+
+        return nameMatch || aliasMatch;
+
+    });
+
+
+    result.style.display = "block";
+
+
+    if (matches.length === 0) {
+
+        result.innerHTML = `
+            <h3>Drug not found</h3>
+            <p>
+                No medication matching
+                "<strong>${input}</strong>"
+                was found.
+            </p>
+        `;
+
+        return;
+    }
+
+
+    result.innerHTML = matches
+        .slice(0, 20)
+        .map(drug => {
+
+            let riskText;
+            let riskClass;
+
+            if (drug.category === "HIGH") {
+
+                riskText = "🔴 HIGH RISK";
+                riskClass = "high";
+
+            } else if (drug.category === "MODERATE") {
+
+                riskText = "🟠 MODERATE RISK";
+                riskClass = "moderate";
+
+            } else {
+
+                riskText = "🟢 RELATIVELY SAFE";
+                riskClass = "safe";
+
+            }
+
+
+            return `
+                <div class="drug-result">
+
+                    <div class="drug-name">
+                        ${drug.name}
+                    </div>
+
+                    <div class="risk ${riskClass}">
+                        ${riskText}
+                    </div>
+
+                    <div class="status">
+                        ${drug.status || ""}
+                    </div>
+
+                    <div class="notes">
+                        ${drug.notes || ""}
+                    </div>
+
+                </div>
+            `;
+
+        })
+        .join("");
+
+}
 
 
     // البحث الجزئي داخل الاسم والـ aliases

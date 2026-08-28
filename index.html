@@ -3,24 +3,95 @@
 
 <head>
 
-    <meta charset="UTF-8">
+<meta charset="UTF-8">
 
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <meta name="theme-color"
-          content="#073b4c">
+<meta name="theme-color" content="#073b4c">
 
-    <title>G6PD-ARON</title>
+<title>G6PD-ARON</title>
 
-    .search-container {
+
+<style>
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f4f7f9;
+    color: #222;
+}
+
+header {
+    background: #073b4c;
+    color: white;
+    padding: 35px 20px;
+    text-align: center;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 34px;
+}
+
+header p {
+    margin-top: 8px;
+    font-size: 16px;
+    opacity: 0.9;
+}
+
+.container {
+    max-width: 800px;
+    margin: 30px auto;
+    padding: 0 20px;
+}
+
+
+/* SEARCH */
+
+.search-container {
     position: relative;
 }
+
+.search-box {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 0;
+}
+
+#searchInput {
+    flex: 1;
+    padding: 16px;
+    border: 1px solid #ccc;
+    border-radius: 12px;
+    font-size: 16px;
+    outline: none;
+}
+
+#searchInput:focus {
+    border-color: #073b4c;
+}
+
+.search-box button {
+    padding: 16px 22px;
+    border: none;
+    border-radius: 12px;
+    background: #073b4c;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+
+/* SUGGESTIONS */
 
 .suggestions {
     display: none;
     position: absolute;
-    top: 70px;
+    top: 65px;
     left: 0;
     right: 105px;
     background: white;
@@ -34,10 +105,6 @@
     padding: 14px 16px;
     cursor: pointer;
     border-bottom: 1px solid #eee;
-}
-
-.suggestion:last-child {
-    border-bottom: none;
 }
 
 .suggestion:hover {
@@ -64,205 +131,160 @@
 .suggestion-safe {
     color: #137333;
 }
-    
-    <style>
 
-        * {
-            box-sizing: border-box;
-        }
 
-        body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-            background: #f4f7f9;
-            color: #222;
-        }
+/* WELCOME */
 
-        header {
-            background: #073b4c;
-            color: white;
-            padding: 35px 20px;
-            text-align: center;
-        }
+.welcome {
+    margin-top: 30px;
+    background: white;
+    padding: 25px;
+    border-radius: 16px;
+    text-align: center;
+    box-shadow: 0 3px 12px rgba(0,0,0,0.06);
+}
 
-        header h1 {
-            margin: 0;
-            font-size: 34px;
-        }
+.welcome h2 {
+    margin-top: 0;
+}
 
-        header p {
-            margin-top: 8px;
-            font-size: 16px;
-            opacity: 0.9;
-        }
 
-        .container {
-            max-width: 800px;
-            margin: 30px auto;
-            padding: 0 20px;
-        }
+/* CATEGORIES */
 
-        .search-box {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 25px;
-        }
+.categories {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin-top: 20px;
+}
 
-        #searchInput {
-            flex: 1;
-            padding: 16px;
-            border: 1px solid #ccc;
-            border-radius: 12px;
-            font-size: 16px;
-            outline: none;
-        }
+.category {
+    background: white;
+    padding: 18px 10px;
+    border-radius: 14px;
+    text-align: center;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+}
 
-        #searchInput:focus {
-            border-color: #073b4c;
-        }
+.category strong {
+    display: block;
+    font-size: 14px;
+    margin-top: 6px;
+}
 
-        .search-box button {
-            padding: 16px 22px;
-            border: none;
-            border-radius: 12px;
-            background: #073b4c;
-            color: white;
-            font-size: 16px;
-            cursor: pointer;
-        }
 
-        .search-box button:hover {
-            opacity: 0.9;
-        }
+/* RESULT */
 
-        .welcome {
-            background: white;
-            padding: 25px;
-            border-radius: 16px;
-            text-align: center;
-            box-shadow: 0 3px 12px rgba(0,0,0,0.06);
-        }
+.result {
+    display: none;
+    margin-top: 25px;
+    background: white;
+    border-radius: 16px;
+    padding: 25px;
+    box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+}
 
-        .welcome h2 {
-            margin-top: 0;
-        }
+.drug-name {
+    font-size: 28px;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
 
-        .categories {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 12px;
-            margin-top: 20px;
-        }
+.risk {
+    display: inline-block;
+    padding: 9px 15px;
+    border-radius: 20px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
 
-        .category {
-            background: white;
-            padding: 18px 10px;
-            border-radius: 14px;
-            text-align: center;
-            box-shadow: 0 3px 10px rgba(0,0,0,0.05);
-        }
+.high {
+    background: #ffdede;
+    color: #b00020;
+}
 
-        .category strong {
-            display: block;
-            font-size: 14px;
-            margin-top: 6px;
-        }
+.moderate {
+    background: #fff0cc;
+    color: #9a6500;
+}
 
-        .result {
-            display: none;
-            margin-top: 25px;
-            background: white;
-            border-radius: 16px;
-            padding: 25px;
-            box-shadow: 0 3px 12px rgba(0,0,0,0.08);
-        }
+.safe {
+    background: #dff5e5;
+    color: #137333;
+}
 
-        .drug-name {
-            font-size: 28px;
-            font-weight: bold;
-            margin-bottom: 15px;
-        }
+.status {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
 
-        .risk {
-            display: inline-block;
-            padding: 9px 15px;
-            border-radius: 20px;
-            font-weight: bold;
-            margin-bottom: 20px;
-        }
+.notes {
+    line-height: 1.6;
+    color: #555;
+}
 
-        .high {
-            background: #ffdede;
-            color: #b00020;
-        }
+.aliases {
+    margin-top: 15px;
+    color: #666;
+    font-size: 14px;
+}
 
-        .moderate {
-            background: #fff0cc;
-            color: #9a6500;
-        }
 
-        .safe {
-            background: #dff5e5;
-            color: #137333;
-        }
+/* NOT FOUND */
 
-        .status {
-            font-size: 18px;
-            font-weight: bold;
-            margin-bottom: 15px;
-        }
+.not-found {
+    display: none;
+    margin-top: 20px;
+    background: white;
+    padding: 25px;
+    border-radius: 16px;
+    text-align: center;
+}
 
-        .notes {
-            line-height: 1.6;
-            color: #555;
-        }
 
-        .aliases {
-            margin-top: 15px;
-            color: #666;
-            font-size: 14px;
-        }
+/* FOOTER */
 
-        .not-found {
-            display: none;
-            margin-top: 20px;
-            background: white;
-            padding: 25px;
-            border-radius: 16px;
-            text-align: center;
-        }
+footer {
+    text-align: center;
+    padding: 35px 20px;
+    color: #777;
+    font-size: 13px;
+}
 
-        footer {
-            text-align: center;
-            padding: 35px 20px;
-            color: #777;
-            font-size: 13px;
-        }
 
-        @media (max-width: 600px) {
+/* MOBILE */
 
-            .search-box {
-                flex-direction: column;
-            }
+@media (max-width: 600px) {
 
-            .search-box button {
-                width: 100%;
-            }
+    .search-box {
+        flex-direction: column;
+    }
 
-            .categories {
-                grid-template-columns: 1fr;
-            }
+    .search-box button {
+        width: 100%;
+    }
 
-            header h1 {
-                font-size: 28px;
-            }
+    .suggestions {
+        right: 0;
+        top: 125px;
+    }
 
-            .drug-name {
-                font-size: 24px;
-            }
-        }
+    .categories {
+        grid-template-columns: 1fr;
+    }
 
-    </style>
+    header h1 {
+        font-size: 28px;
+    }
+
+    .drug-name {
+        font-size: 24px;
+    }
+
+}
+
+</style>
 
 </head>
 
@@ -272,11 +294,9 @@
 
 <header>
 
-    <h1>G6PD-ARON</h1>
+<h1>G6PD-ARON</h1>
 
-    <p>
-        G6PD Drug Safety Checker
-    </p>
+<p>G6PD Drug Safety Checker</p>
 
 </header>
 
@@ -284,120 +304,107 @@
 <div class="container">
 
 
-    <div class="search-box">
+<div class="search-container">
 
-     <div class="search-container">
+<div class="search-box">
 
-    <div class="search-box">
+<input
+type="text"
+id="searchInput"
+placeholder="Search medication..."
+autocomplete="off"
+>
 
-        <input
-            type="text"
-            id="searchInput"
-            placeholder="Search medication..."
-            autocomplete="off"
-        >
-
-        <button onclick="searchDrug()">
-            Search
-        </button>
-
-    </div>
-
-    <div id="suggestions"
-         class="suggestions">
-    </div>
+<button onclick="searchDrug()">
+Search
+</button>
 
 </div>
 
 
-    <div class="welcome">
+<div id="suggestions" class="suggestions"></div>
 
-        <h2>
-            G6PD Drug Safety Checker
-        </h2>
-
-        <p>
-            Search for a medication to check
-            its G6PD safety classification.
-        </p>
+</div>
 
 
-        <div class="categories">
 
-            <div class="category">
-                🔴
-                <strong>High Risk</strong>
-            </div>
+<div class="welcome">
 
-            <div class="category">
-                🟠
-                <strong>Moderate Risk</strong>
-            </div>
+<h2>G6PD Drug Safety Checker</h2>
 
-            <div class="category">
-                🟢
-                <strong>Relatively Safe</strong>
-            </div>
-
-        </div>
-
-    </div>
+<p>
+Search for a medication to check its
+G6PD safety classification.
+</p>
 
 
-    <div id="result" class="result">
+<div class="categories">
 
-        <div id="drugName"
-             class="drug-name">
-        </div>
+<div class="category">
+🔴
+<strong>High Risk</strong>
+</div>
 
-        <div id="risk"
-             class="risk">
-        </div>
+<div class="category">
+🟠
+<strong>Moderate Risk</strong>
+</div>
 
-        <div id="status"
-             class="status">
-        </div>
+<div class="category">
+🟢
+<strong>Relatively Safe</strong>
+</div>
 
-        <div id="notes"
-             class="notes">
-        </div>
+</div>
 
-        <div id="aliases"
-             class="aliases">
-        </div>
-
-    </div>
+</div>
 
 
-    <div id="notFound"
-         class="not-found">
 
-        <h3>
-            Drug not found
-        </h3>
+<div id="result" class="result">
 
-        <p>
-            No medication matching your search
-            was found in the current database.
-        </p>
+<div id="drugName" class="drug-name"></div>
 
-    </div>
+<div id="risk" class="risk"></div>
+
+<div id="status" class="status"></div>
+
+<div id="notes" class="notes"></div>
+
+<div id="aliases" class="aliases"></div>
+
+</div>
+
+
+
+<div id="notFound" class="not-found">
+
+<h3>Drug not found</h3>
+
+<p>
+No medication matching your search
+was found in the current database.
+</p>
+
+</div>
 
 
 </div>
+
 
 
 <footer>
 
-    G6PD-ARON © 2026
+G6PD-ARON © 2026
 
-    <br><br>
+<br><br>
 
-    For educational and clinical reference purposes.
-    Always verify medication safety using authoritative
-    clinical references.
+For educational and clinical reference purposes.
+Always verify medication safety using authoritative
+clinical references.
 
 </footer>
+
 
 
 <script>
@@ -406,37 +413,41 @@
 let drugs = [];
 
 
+/* LOAD DATABASE */
+
 fetch("data/drugs.json")
 
-    .then(response => {
+.then(response => {
 
-        if (!response.ok) {
-            throw new Error("Database could not be loaded.");
-        }
+    if (!response.ok) {
+        throw new Error("Database could not be loaded.");
+    }
 
-        return response.json();
+    return response.json();
 
-    })
+})
 
-    .then(data => {
+.then(data => {
 
-        drugs = data;
+    drugs = data;
 
-        console.log(
-            "Drug database loaded:",
-            drugs.length,
-            "drugs"
-        );
+    console.log(
+        "Drug database loaded:",
+        drugs.length,
+        "drugs"
+    );
 
-    })
+})
 
-    .catch(error => {
+.catch(error => {
 
-        console.error(error);
+    console.error(error);
 
-    });
+});
 
 
+
+/* NORMALIZE */
 
 function normalize(text) {
 
@@ -449,6 +460,8 @@ function normalize(text) {
 }
 
 
+
+/* SEARCH */
 
 function searchDrug() {
 
@@ -477,12 +490,12 @@ function searchDrug() {
 
     const drug = drugs.find(item => {
 
-        const mainName =
-            normalize(item.name);
+        if (
+            normalize(item.name) === input
+        ) {
 
-
-        if (mainName === input) {
             return true;
+
         }
 
 
@@ -534,7 +547,6 @@ function searchDrug() {
 
     }
 
-
     else if (drug.category === "MODERATE") {
 
         riskElement.textContent =
@@ -543,7 +555,6 @@ function searchDrug() {
         riskElement.classList.add("moderate");
 
     }
-
 
     else {
 
@@ -590,7 +601,8 @@ function searchDrug() {
 
 
 
-// Search when pressing Enter
+/* LIVE SUGGESTIONS */
+
 const searchInput =
     document.getElementById("searchInput");
 
@@ -598,276 +610,190 @@ const suggestions =
     document.getElementById("suggestions");
 
 
-searchInput.addEventListener("input", function() {
+searchInput.addEventListener(
+    "input",
+    function() {
 
-    const input =
-        normalize(this.value);
-
-    suggestions.innerHTML = "";
-
-    if (input.length < 2) {
-
-        suggestions.style.display = "none";
-
-        return;
-    }
+        const input =
+            normalize(this.value);
 
 
-    const matches = drugs
-        .filter(item => {
-
-            const name =
-                normalize(item.name);
-
-            const aliases =
-                item.aliases || [];
-
-            const nameMatch =
-                name.includes(input);
-
-            const aliasMatch =
-                aliases.some(alias =>
-                    normalize(alias).includes(input)
-                );
-
-            return nameMatch || aliasMatch;
-
-        })
-        .slice(0, 8);
+        suggestions.innerHTML = "";
 
 
-    if (matches.length === 0) {
-
-        suggestions.style.display = "none";
-
-        return;
-    }
-
-
-    matches.forEach(drug => {
-
-        const item =
-            document.createElement("div");
-
-        item.className = "suggestion";
-
-
-        let riskText = "";
-        let riskClass = "";
-
-
-        if (drug.category === "HIGH") {
-
-            riskText = "🔴 High Risk";
-            riskClass = "suggestion-high";
-
-        }
-
-        else if (drug.category === "MODERATE") {
-
-            riskText = "🟠 Moderate Risk";
-            riskClass = "suggestion-moderate";
-
-        }
-
-        else {
-
-            riskText = "🟢 Relatively Safe";
-            riskClass = "suggestion-safe";
-
-        }
-
-
-        item.innerHTML = `
-            <div class="suggestion-name">
-                ${drug.name}
-            </div>
-
-            <div class="suggestion-risk ${riskClass}">
-                ${riskText}
-            </div>
-        `;
-
-
-        item.addEventListener("click", function() {
-
-            searchInput.value = drug.name;
+        if (input.length < 2) {
 
             suggestions.style.display = "none";
 
-            searchDrug();
+            return;
+
+        }
+
+
+        const matches =
+            drugs
+            .filter(item => {
+
+                const name =
+                    normalize(item.name);
+
+                const aliases =
+                    item.aliases || [];
+
+
+                const nameMatch =
+                    name.includes(input);
+
+
+                const aliasMatch =
+                    aliases.some(alias =>
+                        normalize(alias).includes(input)
+                    );
+
+
+                return nameMatch || aliasMatch;
+
+            })
+            .slice(0, 8);
+
+
+        if (matches.length === 0) {
+
+            suggestions.style.display = "none";
+
+            return;
+
+        }
+
+
+        matches.forEach(drug => {
+
+            const item =
+                document.createElement("div");
+
+
+            item.className =
+                "suggestion";
+
+
+            let riskText = "";
+            let riskClass = "";
+
+
+            if (drug.category === "HIGH") {
+
+                riskText =
+                    "🔴 High Risk";
+
+                riskClass =
+                    "suggestion-high";
+
+            }
+
+            else if (
+                drug.category === "MODERATE"
+            ) {
+
+                riskText =
+                    "🟠 Moderate Risk";
+
+                riskClass =
+                    "suggestion-moderate";
+
+            }
+
+            else {
+
+                riskText =
+                    "🟢 Relatively Safe";
+
+                riskClass =
+                    "suggestion-safe";
+
+            }
+
+
+            item.innerHTML = `
+
+                <div class="suggestion-name">
+                    ${drug.name}
+                </div>
+
+                <div class="suggestion-risk ${riskClass}">
+                    ${riskText}
+                </div>
+
+            `;
+
+
+            item.addEventListener(
+                "click",
+                function() {
+
+                    searchInput.value =
+                        drug.name;
+
+                    suggestions.style.display =
+                        "none";
+
+                    searchDrug();
+
+                }
+            );
+
+
+            suggestions.appendChild(item);
 
         });
 
 
-        suggestions.appendChild(item);
-
-    });
-
-
-    suggestions.style.display = "block";
-
-});
-    document.addEventListener("click", function(event) {
-
-    if (
-        !event.target.closest(".search-container")
-    ) {
-
-        suggestions.style.display = "none";
+        suggestions.style.display =
+            "block";
 
     }
+);
 
-});
-    
-document
-    .getElementById("searchInput")
-    .addEventListener("keydown", function(event) {
+
+
+/* ENTER KEY */
+
+searchInput.addEventListener(
+    "keydown",
+    function(event) {
 
         if (event.key === "Enter") {
 
-            function searchDrug() {
+            suggestions.style.display =
+                "none";
 
-    const input =
-        normalize(
-            document.getElementById("searchInput").value
-        );
-
-    const result =
-        document.getElementById("result");
-
-    const notFound =
-        document.getElementById("notFound");
-
-
-    if (input === "") {
-
-        result.style.display = "none";
-        notFound.style.display = "none";
-
-        return;
-
-    }
-
-
-    const drug = drugs.find(item => {
-
-        const mainName =
-            normalize(item.name);
-
-        // Exact generic-name match
-        if (mainName === input) {
-            return true;
-        }
-
-
-        // Alias match
-        if (item.aliases) {
-
-            const aliasMatch =
-                item.aliases.some(alias =>
-                    normalize(alias) === input
-                );
-
-            if (aliasMatch) {
-                return true;
-            }
+            searchDrug();
 
         }
 
-
-        return false;
-
-    });
+    }
+);
 
 
-    if (!drug) {
 
-        result.style.display = "none";
-        notFound.style.display = "block";
+/* CLOSE SUGGESTIONS */
 
-        return;
+document.addEventListener(
+    "click",
+    function(event) {
+
+        if (
+            !event.target.closest(
+                ".search-container"
+            )
+        ) {
+
+            suggestions.style.display =
+                "none";
+
+        }
 
     }
-
-
-    notFound.style.display = "none";
-    result.style.display = "block";
-
-
-    document.getElementById("drugName")
-        .textContent = drug.name;
-
-
-    const riskElement =
-        document.getElementById("risk");
-
-
-    riskElement.className = "risk";
-
-
-    if (drug.category === "HIGH") {
-
-        riskElement.textContent =
-            "🔴 HIGH RISK";
-
-        riskElement.classList.add("high");
-
-    }
-
-    else if (drug.category === "MODERATE") {
-
-        riskElement.textContent =
-            "🟠 MODERATE RISK";
-
-        riskElement.classList.add("moderate");
-
-    }
-
-    else {
-
-        riskElement.textContent =
-            "🟢 RELATIVELY SAFE";
-
-        riskElement.classList.add("safe");
-
-    }
-
-
-    document.getElementById("status")
-        .textContent = drug.status;
-
-
-    document.getElementById("notes")
-        .textContent =
-            drug.notes ||
-            "No additional information available.";
-
-
-    const aliasesElement =
-        document.getElementById("aliases");
-
-
-    if (
-        drug.aliases &&
-        drug.aliases.length > 0
-    ) {
-
-        aliasesElement.textContent =
-            "Also known as: " +
-            drug.aliases.join(", ");
-
-    }
-
-    else {
-
-        aliasesElement.textContent = "";
-
-    }
-
-}
-
-    });
+);
 
 
 </script>

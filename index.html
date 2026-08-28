@@ -1,12 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <meta name="theme-color"
+          content="#073b4c">
 
     <title>G6PD-ARON</title>
 
     <style>
+
         * {
             box-sizing: border-box;
         }
@@ -14,29 +22,30 @@
         body {
             margin: 0;
             font-family: Arial, sans-serif;
-            background: #f5f7f9;
+            background: #f4f7f9;
             color: #222;
         }
 
         header {
             background: #073b4c;
             color: white;
-            padding: 25px 20px;
+            padding: 35px 20px;
             text-align: center;
         }
 
         header h1 {
             margin: 0;
-            font-size: 30px;
+            font-size: 34px;
         }
 
         header p {
-            margin: 8px 0 0;
+            margin-top: 8px;
+            font-size: 16px;
             opacity: 0.9;
         }
 
         .container {
-            max-width: 700px;
+            max-width: 800px;
             margin: 30px auto;
             padding: 0 20px;
         }
@@ -44,85 +53,499 @@
         .search-box {
             display: flex;
             gap: 10px;
+            margin-bottom: 25px;
         }
 
-        .search-box input {
+        #searchInput {
             flex: 1;
-            padding: 15px;
+            padding: 16px;
             border: 1px solid #ccc;
-            border-radius: 10px;
+            border-radius: 12px;
             font-size: 16px;
+            outline: none;
+        }
+
+        #searchInput:focus {
+            border-color: #073b4c;
         }
 
         .search-box button {
-            padding: 15px 20px;
+            padding: 16px 22px;
             border: none;
-            border-radius: 10px;
+            border-radius: 12px;
             background: #073b4c;
             color: white;
+            font-size: 16px;
             cursor: pointer;
         }
 
+        .search-box button:hover {
+            opacity: 0.9;
+        }
+
         .welcome {
-            margin-top: 30px;
             background: white;
             padding: 25px;
-            border-radius: 15px;
+            border-radius: 16px;
+            text-align: center;
+            box-shadow: 0 3px 12px rgba(0,0,0,0.06);
+        }
+
+        .welcome h2 {
+            margin-top: 0;
+        }
+
+        .categories {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            margin-top: 20px;
+        }
+
+        .category {
+            background: white;
+            padding: 18px 10px;
+            border-radius: 14px;
+            text-align: center;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+        }
+
+        .category strong {
+            display: block;
+            font-size: 14px;
+            margin-top: 6px;
+        }
+
+        .result {
+            display: none;
+            margin-top: 25px;
+            background: white;
+            border-radius: 16px;
+            padding: 25px;
+            box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+        }
+
+        .drug-name {
+            font-size: 28px;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .risk {
+            display: inline-block;
+            padding: 9px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .high {
+            background: #ffdede;
+            color: #b00020;
+        }
+
+        .moderate {
+            background: #fff0cc;
+            color: #9a6500;
+        }
+
+        .safe {
+            background: #dff5e5;
+            color: #137333;
+        }
+
+        .status {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .notes {
+            line-height: 1.6;
+            color: #555;
+        }
+
+        .aliases {
+            margin-top: 15px;
+            color: #666;
+            font-size: 14px;
+        }
+
+        .not-found {
+            display: none;
+            margin-top: 20px;
+            background: white;
+            padding: 25px;
+            border-radius: 16px;
             text-align: center;
         }
+
+        footer {
+            text-align: center;
+            padding: 35px 20px;
+            color: #777;
+            font-size: 13px;
+        }
+
+        @media (max-width: 600px) {
+
+            .search-box {
+                flex-direction: column;
+            }
+
+            .search-box button {
+                width: 100%;
+            }
+
+            .categories {
+                grid-template-columns: 1fr;
+            }
+
+            header h1 {
+                font-size: 28px;
+            }
+
+            .drug-name {
+                font-size: 24px;
+            }
+        }
+
     </style>
+
 </head>
+
 
 <body>
 
+
 <header>
+
     <h1>G6PD-ARON</h1>
-    <p>G6PD Drug Safety Checker</p>
+
+    <p>
+        G6PD Drug Safety Checker
+    </p>
+
 </header>
+
 
 <div class="container">
 
+
     <div class="search-box">
+
         <input
             type="text"
             id="searchInput"
             placeholder="Search medication..."
+            autocomplete="off"
         >
 
         <button onclick="searchDrug()">
             Search
         </button>
+
     </div>
+
 
     <div class="welcome">
-        <h2>Drug Safety Checker</h2>
+
+        <h2>
+            G6PD Drug Safety Checker
+        </h2>
 
         <p>
-            Search for a medication to check its
-            safety classification in G6PD deficiency.
+            Search for a medication to check
+            its G6PD safety classification.
         </p>
 
-        <p>
-            🔴 High Risk &nbsp;
-            🟠 Moderate Risk &nbsp;
-            🟢 Relatively Safe
-        </p>
+
+        <div class="categories">
+
+            <div class="category">
+                🔴
+                <strong>High Risk</strong>
+            </div>
+
+            <div class="category">
+                🟠
+                <strong>Moderate Risk</strong>
+            </div>
+
+            <div class="category">
+                🟢
+                <strong>Relatively Safe</strong>
+            </div>
+
+        </div>
+
     </div>
+
+
+    <div id="result" class="result">
+
+        <div id="drugName"
+             class="drug-name">
+        </div>
+
+        <div id="risk"
+             class="risk">
+        </div>
+
+        <div id="status"
+             class="status">
+        </div>
+
+        <div id="notes"
+             class="notes">
+        </div>
+
+        <div id="aliases"
+             class="aliases">
+        </div>
+
+    </div>
+
+
+    <div id="notFound"
+         class="not-found">
+
+        <h3>
+            Drug not found
+        </h3>
+
+        <p>
+            No medication matching your search
+            was found in the current database.
+        </p>
+
+    </div>
+
 
 </div>
 
-<script>
-    function searchDrug() {
-        const drug = document.getElementById("searchInput").value;
 
-        if (drug.trim() === "") {
-            alert("Please enter a medication name.");
-            return;
+<footer>
+
+    G6PD-ARON © 2026
+
+    <br><br>
+
+    For educational and clinical reference purposes.
+    Always verify medication safety using authoritative
+    clinical references.
+
+</footer>
+
+
+<script>
+
+
+let drugs = [];
+
+
+fetch("data/drugs.json")
+
+    .then(response => {
+
+        if (!response.ok) {
+            throw new Error("Database could not be loaded.");
         }
 
-        alert("Searching for: " + drug);
+        return response.json();
+
+    })
+
+    .then(data => {
+
+        drugs = data;
+
+        console.log(
+            "Drug database loaded:",
+            drugs.length,
+            "drugs"
+        );
+
+    })
+
+    .catch(error => {
+
+        console.error(error);
+
+    });
+
+
+
+function normalize(text) {
+
+    return text
+        .toLowerCase()
+        .trim()
+        .replace(/[-_]/g, " ")
+        .replace(/\s+/g, " ");
+
+}
+
+
+
+function searchDrug() {
+
+    const input =
+        normalize(
+            document.getElementById("searchInput").value
+        );
+
+
+    const result =
+        document.getElementById("result");
+
+    const notFound =
+        document.getElementById("notFound");
+
+
+    if (input === "") {
+
+        result.style.display = "none";
+        notFound.style.display = "none";
+
+        return;
+
     }
+
+
+    const drug = drugs.find(item => {
+
+        const mainName =
+            normalize(item.name);
+
+
+        if (mainName === input) {
+            return true;
+        }
+
+
+        if (item.aliases) {
+
+            return item.aliases.some(alias =>
+                normalize(alias) === input
+            );
+
+        }
+
+
+        return false;
+
+    });
+
+
+    if (!drug) {
+
+        result.style.display = "none";
+        notFound.style.display = "block";
+
+        return;
+
+    }
+
+
+    notFound.style.display = "none";
+    result.style.display = "block";
+
+
+    document.getElementById("drugName")
+        .textContent = drug.name;
+
+
+    const riskElement =
+        document.getElementById("risk");
+
+
+    riskElement.className = "risk";
+
+
+    if (drug.category === "HIGH") {
+
+        riskElement.textContent =
+            "🔴 HIGH RISK";
+
+        riskElement.classList.add("high");
+
+    }
+
+
+    else if (drug.category === "MODERATE") {
+
+        riskElement.textContent =
+            "🟠 MODERATE RISK";
+
+        riskElement.classList.add("moderate");
+
+    }
+
+
+    else {
+
+        riskElement.textContent =
+            "🟢 RELATIVELY SAFE";
+
+        riskElement.classList.add("safe");
+
+    }
+
+
+    document.getElementById("status")
+        .textContent = drug.status;
+
+
+    document.getElementById("notes")
+        .textContent =
+            drug.notes ||
+            "No additional information available.";
+
+
+    const aliasesElement =
+        document.getElementById("aliases");
+
+
+    if (
+        drug.aliases &&
+        drug.aliases.length > 0
+    ) {
+
+        aliasesElement.textContent =
+            "Also known as: " +
+            drug.aliases.join(", ");
+
+    }
+
+    else {
+
+        aliasesElement.textContent = "";
+
+    }
+
+}
+
+
+
+// Search when pressing Enter
+
+document
+    .getElementById("searchInput")
+    .addEventListener("keydown", function(event) {
+
+        if (event.key === "Enter") {
+
+            searchDrug();
+
+        }
+
+    });
+
+
 </script>
 
+
 </body>
+
 </html>

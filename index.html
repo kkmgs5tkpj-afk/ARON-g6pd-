@@ -398,27 +398,20 @@ function searchDrug() {
 
             if (drug.category === "HIGH") {
 
-                riskText = "🔴 HIGH RISK";
+    riskText = "🔴 HIGH RISK";
+    riskClass = "high";
 
-                riskClass = "high";
+} else if (drug.category === "MODERATE") {
 
-            }
+    riskText = "🟠 MODERATE RISK";
+    riskClass = "moderate";
 
-            else if (drug.category === "MODERATE") {
+} else if (drug.category === "SAFE") {
 
-                riskText = "🟠 MODERATE RISK";
+    riskText = "🟢 RELATIVELY SAFE";
+    riskClass = "safe";
 
-                riskClass = "moderate";
-
-            }
-
-            else {
-
-                riskText = "🟢 RELATIVELY SAFE";
-
-                riskClass = "safe";
-
-            }
+}
 
 
             let aliasesHTML = "";

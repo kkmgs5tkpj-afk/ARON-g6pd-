@@ -578,6 +578,88 @@ document
 
     });
 
+function showFamily(family) {
+
+    const familyResult =
+        document.getElementById("familyResult");
+
+    const familyDrugs = drugs.filter(drug =>
+        drug.family === family
+    );
+
+    if (familyDrugs.length === 0) {
+
+        familyResult.innerHTML = `
+            <div class="drug-card">
+                <h3>${family}</h3>
+                <p>No drugs available in this family.</p>
+            </div>
+        `;
+
+        return;
+    }
+
+    familyResult.innerHTML = `
+
+        <div class="drug-card">
+
+            <h2>${family}</h2>
+
+            ${familyDrugs.map(drug => {
+
+                let riskText = "";
+                let riskClass = "";
+
+                if (drug.category === "HIGH") {
+
+                    riskText = "🔴 HIGH RISK";
+                    riskClass = "high";
+
+                } else if (drug.category === "MODERATE") {
+
+                    riskText = "🟠 MODERATE RISK";
+                    riskClass = "moderate";
+
+                } else if (drug.category === "SAFE") {
+
+                    riskText = "🟢 RELATIVELY SAFE";
+                    riskClass = "safe";
+
+                }
+
+                return `
+
+                    <div style="
+                        padding:15px 0;
+                        border-bottom:1px solid #ddd;
+                    ">
+
+                        <div class="drug-name">
+                            ${drug.name}
+                        </div>
+
+                        <div class="${riskClass}">
+                            ${riskText}
+                        </div>
+
+                        <div class="status">
+                            ${drug.status || ""}
+                        </div>
+
+                    </div>
+
+                `;
+
+            }).join("")}
+
+        </div>
+
+    `;
+
+    familyResult.scrollIntoView({
+        behavior: "smooth"
+    });
+}
 </script>
 
 

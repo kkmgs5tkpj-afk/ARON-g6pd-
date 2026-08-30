@@ -1,66 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
 
 <meta charset="UTF-8">
-
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="manifest" href="manifest.json">
-<link rel="icon" type="image/png" sizes="192x192" href="ARON-G6PD-192x192.png">
-<link rel="icon" type="image/png" sizes="512x512" href="ARON-G6PD-512x512.png">
-<link rel="apple-touch-icon" href="ARON-G6PD-192x192.png">
-<meta name="theme-color" content="#073b4c">
 
 <title>G6PD-ARON</title>
 
 <style>
-
-    .drug-card {
-    background: #ffffff;
-    border-radius: 16px;
-    padding: 20px;
-    margin-bottom: 15px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-    border-left: 6px solid #118ab2;
-}
-
-.drug-card .drug-name {
-    font-size: 22px;
-    font-weight: bold;
-    color: #064b5c;
-    margin-bottom: 12px;
-}
-
-.drug-card .high {
-    color: #b00020;
-    font-weight: bold;
-}
-
-.drug-card .moderate {
-    color: #d17b00;
-    font-weight: bold;
-}
-
-.drug-card .safe {
-    color: #137333;
-    font-weight: bold;
-}
-
-.drug-card .status {
-    margin-top: 8px;
-    font-weight: bold;
-}
-
-.drug-card .aliases {
-    margin-top: 10px;
-    font-size: 14px;
-    color: #666;
-}
-    
-* {
-    box-sizing: border-box;
-}
 
 body {
     margin: 0;
@@ -72,29 +19,20 @@ body {
 header {
     background: linear-gradient(135deg, #064b5c, #087e8b);
     color: white;
-    padding: 40px 20px;
     text-align: center;
+    padding: 35px 20px;
 }
 
 header h1 {
     margin: 0;
-    font-size: 34px;
-    letter-spacing: 1px;
-}
-
-header p {
-    margin-top: 10px;
-    font-size: 16px;
-    opacity: 0.9;
+    font-size: 32px;
 }
 
 .container {
     max-width: 800px;
-    margin: 30px auto;
+    margin: 25px auto;
     padding: 20px;
 }
-
-/* SEARCH */
 
 .search {
     display: flex;
@@ -103,53 +41,39 @@ header p {
 
 input {
     flex: 1;
-    padding: 16px;
-    font-size: 16px;
+    padding: 15px;
     border: 2px solid #c9dfe5;
     border-radius: 12px;
-    background: white;
-    color: #172a2f;
-    outline: none;
-}
-
-input:focus {
-    border-color: #118ab2;
+    font-size: 16px;
 }
 
 button {
-    padding: 16px 24px;
+    padding: 15px 22px;
     background: #118ab2;
     color: white;
     border: none;
     border-radius: 12px;
-    font-size: 16px;
     font-weight: bold;
-    cursor: pointer;
 }
-
-button:hover {
-    background: #0b718f;
-}
-
-/* RESULT */
 
 #result {
-    margin-top: 25px;
-    padding: 22px;
-    background: white;
-    border-radius: 16px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    margin-top: 20px;
 }
 
-/* DRUG NAME */
+.drug-card,
+.family-card {
+    background: white;
+    padding: 18px;
+    margin-bottom: 12px;
+    border-radius: 14px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+}
 
 .drug-name {
-    color: #064b5c;
-    font-size: 24px;
+    font-size: 21px;
     font-weight: bold;
+    color: #064b5c;
 }
-
-/* RISK COLORS */
 
 .high {
     color: #b00020;
@@ -166,80 +90,30 @@ button:hover {
     font-weight: bold;
 }
 
-/* STATUS */
+.family-title {
+    font-size: 18px;
+    font-weight: bold;
+    color: #064b5c;
+}
 
-.status {
+.family-drugs {
+    margin-top: 10px;
     color: #555;
 }
 
-/* MOBILE */
-
-@media (max-width: 600px) {
-
-    .search {
-        flex-direction: column;
-    }
-
-    button {
-        width: 100%;
-    }
-
-    header h1 {
-        font-size: 28px;
-    }
-.families-section {
-    margin-top: 30px;
-}
-
-.families-section h2 {
+h2 {
     color: #064b5c;
-    margin-bottom: 15px;
 }
 
-.families-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 12px;
-}
-
-.families-grid button {
-    background: white;
-    color: #064b5c;
-    border: 2px solid #c9dfe5;
-    padding: 16px;
-    border-radius: 14px;
-    font-size: 15px;
-    font-weight: bold;
-    cursor: pointer;
-}
-
-.families-grid button:hover {
-    background: #eef5f7;
-    border-color: #118ab2;
-}
-
-#familyResult {
-    margin-top: 20px;
-}
-
-@media (max-width: 600px) {
-
-    .families-grid {
-        grid-template-columns: 1fr;
-    }
-
-}
 </style>
 
 </head>
-
 
 <body>
 
 <header>
 
 <h1>G6PD-ARON</h1>
-
 <p>G6PD Drug Safety Checker</p>
 
 </header>
@@ -247,17 +121,18 @@ button:hover {
 
 <div class="container">
 
+<!-- SEARCH -->
+
 <div class="search">
 
 <input
-    id="searchInput"
-    type="text"
-    placeholder="Search medication..."
-    autocomplete="off"
+id="searchInput"
+type="text"
+placeholder="Search medication..."
 >
 
 <button onclick="searchDrug()">
-    Search
+Search
 </button>
 
 </div>
@@ -265,47 +140,12 @@ button:hover {
 
 <div id="result"></div>
 
-<div class="families-section">
 
-    <h2>💊 Drug Families</h2>
+<!-- DRUG FAMILIES -->
 
-    <div class="families-grid">
+<h2>Drug Families</h2>
 
-        <button onclick="showFamily('Analgesics & Antipyretics')">
-            🩹 Analgesics & Antipyretics
-        </button>
-
-        <button onclick="showFamily('Antibiotics')">
-            🦠 Antibiotics
-        </button>
-
-        <button onclick="showFamily('Antimalarials')">
-            🦟 Antimalarials
-        </button>
-
-        <button onclick="showFamily('CNS Drugs')">
-            🧠 CNS Drugs
-        </button>
-
-        <button onclick="showFamily('Cardiovascular Drugs')">
-            ❤️ Cardiovascular Drugs
-        </button>
-
-        <button onclick="showFamily('Anticancer Drugs')">
-            🎗️ Anticancer Drugs
-        </button>
-
-        <button onclick="showFamily('Ophthalmic Drugs')">
-            👁️ Ophthalmic Drugs
-        </button>
-
-        <button onclick="showFamily('Other Drugs')">
-            🧪 Other Drugs
-        </button>
-
-    </div>
-
-<div id="familyResult"></div>
+<div id="families"></div>
 
 </div>
 
@@ -315,78 +155,52 @@ button:hover {
 let drugs = [];
 
 
-// ================================
-// LOAD DATABASE
-// ================================
+/* LOAD DATABASE */
 
 fetch("data/drugs.json")
 
-.then(response => {
-
-    if (!response.ok) {
-        throw new Error("Database could not be loaded");
-    }
-
-    return response.json();
-
-})
+.then(response => response.json())
 
 .then(data => {
 
     drugs = data;
 
-    console.log(
-        "Database loaded:",
-        drugs.length,
-        "drugs"
-    );
+    showFamilies();
 
 })
 
 .catch(error => {
 
-    console.error(
-        "Database error:",
-        error
-    );
+    console.log("Database error:", error);
 
 });
 
 
-// ================================
-// NORMALIZE TEXT
-// ================================
+/* NORMALIZE */
 
 function normalize(text) {
 
     return String(text || "")
         .toLowerCase()
-        .trim()
-        .replace(/[-_]/g, " ")
-        .replace(/\s+/g, " ");
+        .trim();
 
 }
 
 
-// ================================
-// SEARCH
-// ================================
+/* SEARCH */
 
 function searchDrug() {
 
-    const input = normalize(
-        document.getElementById("searchInput").value
-    );
+    const input =
+        normalize(
+            document.getElementById("searchInput").value
+        );
 
     const result =
         document.getElementById("result");
 
 
-    // Empty search
-
     if (input === "") {
-
-        result.style.display = "none";
 
         result.innerHTML = "";
 
@@ -395,65 +209,35 @@ function searchDrug() {
     }
 
 
-    // ================================
-    // PARTIAL SEARCH
-    // ================================
-
     const matches = drugs.filter(drug => {
 
-        const name =
-            normalize(drug.name);
-
-
-        // Search in drug name
-
-        if (name.includes(input)) {
-
+        if (
+            normalize(drug.name)
+            .includes(input)
+        ) {
             return true;
-
         }
 
-
-        // Search in aliases
 
         if (Array.isArray(drug.aliases)) {
 
             return drug.aliases.some(alias =>
-
                 normalize(alias).includes(input)
-
             );
 
         }
-
 
         return false;
 
     });
 
 
-    // ================================
-    // NO RESULTS
-    // ================================
-
     if (matches.length === 0) {
 
-        result.style.display = "block";
-
         result.innerHTML = `
-
-            <div class="not-found">
-
+            <div class="drug-card">
                 <h3>Drug not found</h3>
-
-                <p>
-                    No medication matching
-                    "<strong>${input}</strong>"
-                    was found.
-                </p>
-
             </div>
-
         `;
 
         return;
@@ -461,59 +245,31 @@ function searchDrug() {
     }
 
 
-    // ================================
-    // DISPLAY RESULTS
-    // ================================
-
-    result.style.display = "block";
-
-
     result.innerHTML = matches
         .slice(0, 20)
         .map(drug => {
 
-
-            let riskText = "";
-
-            let riskClass = "";
-
+            let risk = "";
+            let className = "";
 
             if (drug.category === "HIGH") {
 
-    riskText = "🔴 HIGH RISK";
-    riskClass = "high";
+                risk = "🔴 HIGH RISK";
+                className = "high";
 
-} else if (drug.category === "MODERATE") {
+            }
 
-    riskText = "🟠 MODERATE RISK";
-    riskClass = "moderate";
+            else if (drug.category === "MODERATE") {
 
-} else if (drug.category === "SAFE") {
+                risk = "🟠 MODERATE RISK";
+                className = "moderate";
 
-    riskText = "🟢 RELATIVELY SAFE";
-    riskClass = "safe";
+            }
 
-}
+            else if (drug.category === "SAFE") {
 
-
-            let aliasesHTML = "";
-
-
-            if (
-                Array.isArray(drug.aliases) &&
-                drug.aliases.length > 0
-            ) {
-
-                aliasesHTML = `
-
-                    <div class="aliases">
-
-                        Also known as:
-                        ${drug.aliases.join(", ")}
-
-                    </div>
-
-                `;
+                risk = "🟢 RELATIVELY SAFE";
+                className = "safe";
 
             }
 
@@ -523,33 +279,36 @@ function searchDrug() {
                 <div class="drug-card">
 
                     <div class="drug-name">
-
                         ${drug.name}
-
                     </div>
 
+                    <p class="${className}">
+                        ${risk}
+                    </p>
 
-                    <div class="${riskClass}">
+                    <p>
+                        <strong>
+                            ${drug.status || ""}
+                        </strong>
+                    </p>
 
-                        ${riskText}
-
-                    </div>
-
-
-                    <div class="status">
-
-                        ${drug.status || ""}
-
-                    </div>
-
-
-                    ${aliasesHTML}
-
+                    <p>
+                        Family:
+                        <strong>
+                            ${drug.family || "Not specified"}
+                        </strong>
+                    </p>
 
                     ${
-                        drug.notes
-                        ? `<p>${drug.notes}</p>`
-                        : ""
+                        drug.aliases &&
+                        drug.aliases.length
+                        ?
+                        `<p>
+                            Also known as:
+                            ${drug.aliases.join(", ")}
+                        </p>`
+                        :
+                        ""
                     }
 
                 </div>
@@ -562,107 +321,81 @@ function searchDrug() {
 }
 
 
-// ================================
-// ENTER KEY
-// ================================
+/* DRUG FAMILIES */
 
-document
-    .getElementById("searchInput")
-    .addEventListener("keydown", function(event) {
+function showFamilies() {
 
-        if (event.key === "Enter") {
+    const families = {};
 
-            searchDrug();
+
+    drugs.forEach(drug => {
+
+        const family =
+            drug.family || "Other";
+
+
+        if (!families[family]) {
+
+            families[family] = [];
 
         }
 
+        families[family].push(drug);
+
     });
 
-function showFamily(family) {
 
-    const familyResult =
-        document.getElementById("familyResult");
+    const container =
+        document.getElementById("families");
 
-    const familyDrugs = drugs.filter(drug =>
-        drug.family === family
-    );
 
-    if (familyDrugs.length === 0) {
+    container.innerHTML =
+        Object.keys(families)
+        .sort()
+        .map(family => {
 
-        familyResult.innerHTML = `
-            <div class="drug-card">
-                <h3>${family}</h3>
-                <p>No drugs available in this family.</p>
-            </div>
-        `;
+            return `
 
-        return;
-    }
+                <div class="family-card">
 
-    familyResult.innerHTML = `
+                    <div class="family-title">
+                        ${family}
+                    </div>
 
-        <div class="drug-card">
+                    <div class="family-drugs">
 
-            <h2>${family}</h2>
-
-            ${familyDrugs.map(drug => {
-
-                let riskText = "";
-                let riskClass = "";
-
-                if (drug.category === "HIGH") {
-
-                    riskText = "🔴 HIGH RISK";
-                    riskClass = "high";
-
-                } else if (drug.category === "MODERATE") {
-
-                    riskText = "🟠 MODERATE RISK";
-                    riskClass = "moderate";
-
-                } else if (drug.category === "SAFE") {
-
-                    riskText = "🟢 RELATIVELY SAFE";
-                    riskClass = "safe";
-
-                }
-
-                return `
-
-                    <div style="
-                        padding:15px 0;
-                        border-bottom:1px solid #ddd;
-                    ">
-
-                        <div class="drug-name">
-                            ${drug.name}
-                        </div>
-
-                        <div class="${riskClass}">
-                            ${riskText}
-                        </div>
-
-                        <div class="status">
-                            ${drug.status || ""}
-                        </div>
+                        ${families[family]
+                            .map(drug => drug.name)
+                            .join(", ")
+                        }
 
                     </div>
 
-                `;
+                </div>
 
-            }).join("")}
+            `;
 
-        </div>
+        })
+        .join("");
 
-    `;
-
-    familyResult.scrollIntoView({
-        behavior: "smooth"
-    });
 }
+
+
+/* ENTER KEY */
+
+document
+.getElementById("searchInput")
+.addEventListener("keydown", function(event) {
+
+    if (event.key === "Enter") {
+
+        searchDrug();
+
+    }
+
+});
+
 </script>
 
-
 </body>
-
 </html>
